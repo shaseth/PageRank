@@ -2,19 +2,28 @@
 // at end damping factor, then update scores
 // 0.002
 // 100 iterations first, see if it works then keep going
-
-public class PageRank {
-
-  public static void pageRank() {
-    double rank;
-    int[] outPages;
-    double newRank;
+public class Page {
+  double rank;
+  int[] outPages;
+  int numOutPages;
+  double newRank;
+  
+  // constructor
+  public Page (int startRank) {
+    this.rank = startRank;
   }
+} // end Page class
+
+public class pageRank {
+
+  public static void rank() {
+
+  } // end rank()
 
   public static void main (String[] args) {
     
   }
-}
+} // end pageRank class
 
 // for each node:
 // divide rank + increase newRank for each outgoing link
