@@ -3,3 +3,13 @@
 // 0.002
 // 100 iterations first, see if it works then keep going
 
+public class PageRank {
+
+  public static void pageRank() {
+
+  }
+
+  public static void main (String[] args) {
+
+  }
+}
