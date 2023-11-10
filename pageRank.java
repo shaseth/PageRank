@@ -15,6 +15,7 @@ public class Page {
 } // end Page class
 
 public class pageRank {
+  // read in values and create page instances
 
   public static void rank() {
 
