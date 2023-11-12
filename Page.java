@@ -14,4 +14,10 @@ public class Page {
     this.numOutPages = 0;
     this.newRank = 0;
   } // end constructor
+
+  // for debugging purposes
+  public String toString() {
+    return "Id: " + this.id + "\nRank: " + this.rank + "\n# of Out Pages: " + this.numOutPages;
+  }
+  
 } // end Page class
