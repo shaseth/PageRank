@@ -9,7 +9,7 @@ public class PageRank {
   // at end damping factor, then update scores
   // 0.002
   // 100 iterations first, see if it works then keep going
-  public static void rank(double pageCount; ArrayList<Page> pages) {
+  public static void rank(double pageCount; ArrayList<Page> pages; int iterations) {
     double dampeningFactor = 0.85;
     Page page;
     double newRank = 1 / pageCount;
@@ -20,8 +20,23 @@ public class PageRank {
     }
 	  int iter = 0;
 	  while (iter < iterations) { // add in equilibrium here
+		  // divide each page's rank amongst its out pages
 		  for (int i = 0; i < pageCount; i++) {
 			  page = pages.get(i);
+			  double outRank = page.rank / page.numOutPages;
+			  for (int j = 0; j < page.numOutPages; j++) {
+				  page.outPages.get(j).newRank += outRank;
+			  }
+		  }
+		  // calculate each page's new rank
+		  for (int i = 0; i < pageCount; i++) {
+			  page = pages.get(i);
+			  newRank = ((1 - dampeningFactor) / pageCount) + (dampeningFactor * page.newRank);
+			  // reset newRank val
+			  page.newRank = 0;
+		  }
+		  iter++;
+	  } // end while loop
     
   } // end rank()
 
