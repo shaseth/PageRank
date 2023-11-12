@@ -33,6 +33,7 @@ public class PageRank {
 		  for (int i = 0; i < pageCount; i++) {
 			  page = pages.get(i);
 			  newRank = ((1 - dampeningFactor) / pageCount) + (dampeningFactor * page.newRank);
+			  page.rank = newRank;
 			  // reset newRank val
 			  page.newRank = 0;
 		  }
