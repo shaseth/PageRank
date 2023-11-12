@@ -9,11 +9,12 @@ public class PageRank {
   // 0.002
   // 100 iterations first, see if it works then keep going
   public static void rank() {
-
+    
   } // end rank()
 
   public static void main (String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    String filename = "dolphins.csv";
+    Scanner scanner = new Scanner(new File(filename));
     ArrayList<Page> pages = new ArrayList<>();
     // keeps track of individual pages
     HashMap<String, Page> idPageDict = new HashMap<>();
