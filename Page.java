@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 // Creates Page class for pageRank
 public class Page {
   String id;
