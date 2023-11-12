@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Page {
   String id;
   double rank;
-  ArrayList<Integer> outPages;
+  ArrayList<Page> outPages;
   int numOutPages;
   double newRank;
   
