@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PageRank {
 
@@ -31,23 +32,23 @@ public class PageRank {
       // check if pages already exist, if not add them
       if (idPageDict.containsKey(s1)) {
         p1 = idPageDict.get(s1);
-	   	}
-	    else { // adding p1
-		    p1 = new Page(s1);
-		    pages.add(p1);
-		    pageCount++;
-		    idPageDict.put(s1,p1);
-	    }
+      }
+      else { // adding p1
+	p1 = new Page(s1);
+	pages.add(p1);
+	pageCount++;
+	idPageDict.put(s1,p1);
+      }
 	    
-	    if (idPageDict.containsKey(s2)) {
-    		p2 = idPageDict.get(s2);
-	    }
-	    else { // adding p2
-		    p2 = new Page(s2);
-		    pages.add(p2);
-		    pageCount++;
-		    idPageDict.put(s2,p2);
-	    }
+      if (idPageDict.containsKey(s2)) {
+    	p2 = idPageDict.get(s2);
+      }
+      else { // adding p2
+	p2 = new Page(s2);
+	pages.add(p2);
+	pageCount++;
+	idPageDict.put(s2,p2);
+      }
   
       // don't even have to check if its directed or not because 
       // both always lists the outgoing page first
