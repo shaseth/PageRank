@@ -14,6 +14,7 @@ public class PageRank {
     double dampeningFactor = 0.85;
     Page page;
     double newRank = 1 / pageCount;
+    double outRank;
     // for each page, set their starting rank of 1/n
     for (int i = 0; i < pageCount; i++) {
 	    page = pages.get(i);
@@ -24,7 +25,7 @@ public class PageRank {
 		  // divide each page's rank amongst its out pages
 		  for (int i = 0; i < pageCount; i++) {
 			  page = pages.get(i);
-			  double outRank = page.rank / page.numOutPages;
+			  outRank = page.rank / page.numOutPages;
 			  for (int j = 0; j < page.numOutPages; j++) {
 				  page.outPages.get(j).newRank += outRank;
 			  }
@@ -86,6 +87,7 @@ public class PageRank {
       p1.outPages.add(p2);
       p1.numOutPages++;
     } // end while loop
+  rank(pageCount, pages, iterations);
   } // end main
 } // end PageRank class
 
