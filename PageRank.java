@@ -5,11 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 public class PageRank {
-
-    // start with initial values, do pagerank - keep updated values but don't update yet
-    // at end damping factor, then update scores
-    // 0.002
-    // 100 iterations first, see if it works then keep going
+    // equilibrium 0.002
     public static void rank(double pageCount; ArrayList<Page> pages; int iterations) {
         double dampingFactor = 0.85;
         Page page;
@@ -40,6 +36,25 @@ public class PageRank {
 	iter++;
 	} // end while loop
     } // end rank()
+
+	  /*
+   * Sorts pages in decreasing order based on their rank and prints out the result
+   * @param: int pageCount, the # of nodes, or pages, in the inputed ArrayList
+   * @param: ArrayList<Page> pages, the ArrayList containing the nodes of a graph
+   */
+    public static void finalRank(int pageCount, ArrayList<Page> pages) {
+	Page[] rankedPages = new Page[pageCount];
+	for (int i = 0; i < pageCount ; i++) {
+	    rankedPages[i] = pages.get(i);
+	}
+	// sorts them in ascending
+	PageMergeSort ob = new PageMergeSort();
+	ob.sort(rankedPages, 0, pageCount - 1);
+	// print pages and their score, ordered by rank asc (score desc)
+	for (int i = 0; i < pageCount; i++) {
+	    System.out.println(" " + (i+1) + "  id: " + rankedPages[i].id + " rankScore: " + rankedPages[i].rank);
+	}
+    }
 
     public static void main (String[] args) throws FileNotFoundException {
 	String filename = "dolphins.csv";
@@ -85,11 +100,6 @@ public class PageRank {
       	    p1.numOutPages++;
     	} // end while loop
     rank(pageCount, pages, iterations);
+    finalRank(pageCount,pages);
     } // end main
 } // end PageRank class
-
-// for each node:
-// divide rank + increase newRank for each outgoing link
-// set self.newRank to 0
-// foor each node:
-// rank = newRank
