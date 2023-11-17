@@ -54,7 +54,7 @@ public class PageRank {
 	    rankedPages[i] = pages.get(i);
 	}
 	// sorts them in ascending
-	PageMergeSort ob = new PageMergeSort();
+	PageSort ob = new PageSort();
 	ob.sort(rankedPages, 0, pageCount - 1);
 	// print pages and their score, ordered by rank asc (score desc)
 	for (int i = 0; i < pageCount; i++) {
