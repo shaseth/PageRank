@@ -6,7 +6,7 @@ import java.io.File;
 
 public class PageRank {
     // equilibrium 0.002
-    public static void rank(double pageCount; ArrayList<Page> pages; int iterations) {
+    public static void rank(double pageCount; ArrayList<Page> pages; int iterations, double equilibrium) {
         double dampingFactor = 0.85;
         Page page;
     	double newRank = 1 / pageCount;
@@ -16,7 +16,9 @@ public class PageRank {
 	    pages.get(i).rank = newRank;
     	}
     	int iter = 0;
-    	while (iter < iterations) { // add in equilibrium here
+	boolean equilMet = false;
+    	while (iter < iterations && equilMet == false) { // add in equilibrium here
+	equilMet = true;
     	// divide each page's rank amongst its out pages
     	for (int i = 0; i < pageCount; i++) {
 	    page = pages.get(i);
@@ -29,6 +31,10 @@ public class PageRank {
 	for (int i = 0; i < pageCount; i++) {
 	    page = pages.get(i);
   	    newRank = ((1 - dampingFactor) / pageCount) + (dampingFactor * page.newRank);
+	    // if the difference between old and new rank is > equil., the equil. hasn't been met
+	    if (Math.abs(page.rank - newRank) > equilibrium) {
+	    	equilMet = false;
+	    }
 	    page.rank = newRank;
 	    // reset newRank val
 	    page.newRank = 0;
@@ -63,6 +69,7 @@ public class PageRank {
     	HashMap<String, Page> idPageDict = new HashMap<>(); // keeps track of individual pages
     	int pageCount = 0;
     	int iterations = 100000;
+	double equilibrium = 0.0002;
   
     	// read in values and create page instances
     	while (scanner.hasNextLine() == true) {
@@ -99,7 +106,7 @@ public class PageRank {
       	    p1.outPages.add(p2);
       	    p1.numOutPages++;
     	} // end while loop
-    rank(pageCount, pages, iterations);
+    rank(pageCount, pages, iterations, equilibrium);
     finalRank(pageCount,pages);
     } // end main
 } // end PageRank class
