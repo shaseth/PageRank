@@ -82,7 +82,7 @@ public class PageRankTest {
 
   public static void main (String[] args) throws FileNotFoundException {
     String filename = "karateDir.csv";
-    Scanner scanner = new Scanner(new File("resources/" + filename));
+    Scanner scanner = new Scanner(new File(filename));
     ArrayList<Page> pages = new ArrayList<>();
     // keeps track of individual pages
     HashMap<String, Page> idPageDict = new HashMap<>();
