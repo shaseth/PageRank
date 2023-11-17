@@ -6,7 +6,7 @@ import java.io.File;
 
 public class PageRank {
     // equilibrium 0.002
-    public static void rank(double pageCount; ArrayList<Page> pages; int iterations, double equilibrium) {
+    public static void rank(double pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
         double dampingFactor = 0.85;
         Page page;
     	double newRank = 1 / pageCount;
