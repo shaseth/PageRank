@@ -29,7 +29,7 @@ public class PageRankTest {
 				outRank = page.rank / pageCount;
 				// distribute page rank among all pages
 				for (int j = 0; j < pageCount; j++) {
-					//if (pages.get(j) != page) {
+					//if (pages.get(j) != page) { // add me back to distribute rank among all other pages
 						pages.get(j).newRank += outRank;
 					//}
 				}
