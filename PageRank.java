@@ -6,6 +6,15 @@ import java.io.File;
 
 public class PageRankTest {
 
+  /*
+   * A page rank function--calls final rank to sort and print the final rankings
+   * @param: int pageCount, the # of pages in the graph
+   * @param: ArrayList<Page> pages, an ArrayList containing all Page instances representative 
+   * of the graph
+   * @param: int iterations, the # of iterations to perform pageRank
+   * @param: double equilibrium, a stopping point for performing iterations determining the 
+   * minimum amount of change of each page's rank between rounds
+   */
   public static void rank(int pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
   	double dampingFactor = 0.85;
   	Page page;
@@ -79,7 +88,16 @@ public class PageRankTest {
 		  System.out.println(" " + (i+1) + "  id: " + rankedPages[i].id + " rankScore: " + rankedPages[i].rank);
 	  }
   }
-  
+
+  /*
+   * Calls the rank function with the specified arguments and times how long it takes to perform
+   * @param: int pageCount, the # of pages in the graph
+   * @param: ArrayList<Page> pages, an ArrayList containing all Page instances representative 
+   * of the graph
+   * @param: int iterations, the # of iterations to perform pageRank
+   * @param: double equilibrium, a stopping point for performing iterations determining the 
+   * minimum amount of change of each page's rank between rounds
+   */
   public static void timeRank(int pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
 	Stopwatch sw = new Stopwatch();
 	rank(pageCount, pages, iterations, equilibrium);
