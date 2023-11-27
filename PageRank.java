@@ -7,58 +7,58 @@ import java.io.File;
 public class PageRankTest {
 
   public static void rank(int pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
-    double dampingFactor = 0.85;
-    Page page;
-    double newRank = 1 / pageCount;
-    double outRank;
-    // for each page, set their starting rank of 1/n
-    for (int i = 0; i < pageCount; i++) {
-	    pages.get(i).rank = newRank;
-    }
-	  int iter = 0;
-	  // has the algorithm reached an equilibrium
-	  boolean equilMet = false;
-	  while (iter < iterations && equilMet == false) { 
-		  equilMet = true;
-		  // divide each page's rank amongst its out pages
-		  for (int i = 0; i < pageCount; i++) {
-			  page = pages.get(i);
+  	double dampingFactor = 0.85;
+  	Page page;
+  	double newRank = 1 / pageCount;
+  	double outRank;
+	// for each page, set their starting rank of 1/n
+	for (int i = 0; i < pageCount; i++) {
+		pages.get(i).rank = newRank;
+	}
+	int iter = 0;
+	// has the algorithm reached an equilibrium
+	boolean equilMet = false;
+	while (iter < iterations && equilMet == false) { 
+		equilMet = true;
+		// divide each page's rank amongst its out pages
+		for (int i = 0; i < pageCount; i++) {
+			page = pages.get(i);
 			  
-			  // if page is a sink
-			  if (page.numOutPages == 0) {
-				  outRank = page.rank / pageCount;
-				  // distribute page rank among all pages
-				  for (int j = 0; j < pageCount; j++) {
-					  //if (pages.get(j) != page) {
-						  pages.get(j).newRank += outRank;
-					  //}
-				  }
-			  }
-			  else { // not a sink
-				  outRank = page.rank / page.numOutPages;
-				  for (int j = 0; j < page.numOutPages; j++) {
-					  page.outPages.get(j).newRank += outRank;
-				  }
-			  }
-		  } // end i loop 0
+			// if page is a sink
+			if (page.numOutPages == 0) {
+				outRank = page.rank / pageCount;
+				// distribute page rank among all pages
+				for (int j = 0; j < pageCount; j++) {
+					//if (pages.get(j) != page) {
+						pages.get(j).newRank += outRank;
+					//}
+				}
+			}
+			else { // not a sink
+				outRank = page.rank / page.numOutPages;
+				for (int j = 0; j < page.numOutPages; j++) {
+					page.outPages.get(j).newRank += outRank;
+				}
+			}
+		} // end i loop 0
 		  
-		  // calculate each page's new rank
-		  for (int i = 0; i < pageCount; i++) {
-			  page = pages.get(i);
-			  newRank = ((1-dampingFactor) / pageCount) + (dampingFactor * page.newRank);
-			  // if the difference between old and new rank is > equil., the equil. hasn't been met
-			  if (Math.abs(page.rank - newRank) > equilibrium) {
-				  equilMet = false;
-			  }
-			  page.rank = newRank;
-			  // reset newRank val
-			  page.newRank = 0;
-		  } // end i loop 1
+		// calculate each page's new rank
+		for (int i = 0; i < pageCount; i++) {
+			page = pages.get(i);
+			newRank = ((1-dampingFactor) / pageCount) + (dampingFactor * page.newRank);
+			// if the difference between old and new rank is > equil., the equil. hasn't been met
+			if (Math.abs(page.rank - newRank) > equilibrium) {
+				equilMet = false;
+			}
+			page.rank = newRank;
+			// reset newRank val
+			page.newRank = 0;
+		} // end i loop 1
 		  
-		  iter++;
-	  } // end while loop
-    System.out.println("iterations hit: " + iter);
-    finalRank(pageCount, pages);
+		iter++;
+	} // end while loop
+	System.out.println("iterations hit: " + iter);
+	finalRank(pageCount, pages);
   } // end rank()
   
   /*
@@ -81,10 +81,10 @@ public class PageRankTest {
   }
   
   public static void timeRank(int pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
-		Stopwatch sw = new Stopwatch();
-	    rank(pageCount, pages, iterations, equilibrium);
-		double time = sw.elapsedTime();
-		System.out.println("Time taken: " + time);
+	Stopwatch sw = new Stopwatch();
+	rank(pageCount, pages, iterations, equilibrium);
+	double time = sw.elapsedTime();
+	System.out.println("Time taken: " + time);
   }
 
   public static void main (String[] args) throws FileNotFoundException {
