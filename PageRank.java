@@ -35,7 +35,6 @@ public class PageRankTest {
 				  }
 			  }
 			  else { // not a sink
-				  //System.out.println("no sink here");
 				  outRank = page.rank / page.numOutPages;
 				  for (int j = 0; j < page.numOutPages; j++) {
 					  page.outPages.get(j).newRank += outRank;
@@ -59,6 +58,7 @@ public class PageRankTest {
 		  iter++;
 	  } // end while loop
     System.out.println("iterations hit: " + iter);
+    finalRank(pageCount, pages);
   } // end rank()
   
   /*
@@ -72,23 +72,30 @@ public class PageRankTest {
 		  rankedPages[i] = pages.get(i);
 	  }
 	  // sorts them in ascending
-	  PageSort ob = new PageSort();
+	  PageMergeSort ob = new PageMergeSort();
 	  ob.sort(rankedPages, 0, pageCount - 1);
 	  // print pages and their score, ordered by rank asc (score desc)
 	  for (int i = 0; i < pageCount; i++) {
 		  System.out.println(" " + (i+1) + "  id: " + rankedPages[i].id + " rankScore: " + rankedPages[i].rank);
 	  }
   }
+  
+  public static void timeRank(int pageCount, ArrayList<Page> pages, int iterations, double equilibrium) {
+		Stopwatch sw = new Stopwatch();
+	    rank(pageCount, pages, iterations, equilibrium);
+		double time = sw.elapsedTime();
+		System.out.println("Time taken: " + time);
+  }
 
   public static void main (String[] args) throws FileNotFoundException {
-    String filename = "karateDir.csv";
+    String filename = "karate.csv";
     Scanner scanner = new Scanner(new File(filename));
     ArrayList<Page> pages = new ArrayList<>();
     // keeps track of individual pages
     HashMap<String, Page> idPageDict = new HashMap<>();
     int pageCount = 0;
     int iterations = 100;
-    double equilibrium = 0.0002;
+    double equilibrium = 0.000000002;
   
     // read in values and create page instances
     while (scanner.hasNextLine() == true) {
@@ -125,19 +132,8 @@ public class PageRankTest {
       p1.outPages.add(p2);
       p1.numOutPages++;
     } // end while loop
-    rank(pageCount, pages, iterations, equilibrium);
-    finalRank(pageCount, pages);
-    /*
-    for (int i = 0; i < 5; i++) {
-    	System.out.println(pages.get(i).toString());
-    }
-    System.out.println(pageCount);
-    */
+    
+    timeRank(pageCount, pages, iterations, equilibrium);
+    
   } // end main
 } // end PageRank class
-
-// for each node:
-// divide rank + increase newRank for each outgoing link
-// set self.newRank to 0
-// foor each node:
-// rank = newRank
